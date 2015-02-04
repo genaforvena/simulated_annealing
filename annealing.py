@@ -2,11 +2,12 @@ from random import random
 import math
 import copy
 
-from UnionFind import UnionFind
-from Graphs import isUndirected
+from unionFind import UnionFind
+from graphs import is_undirected
 
 
 __author__ = 'imozerov'
+
 
 class Solution:
     """
@@ -69,7 +70,7 @@ def minimum_spanning_tree(graph):
     length of edge u,v, and G[u][v] should always equal G[v][u].
     The tree is returned as a list of edges.
     """
-    if not isUndirected(graph):
+    if not is_undirected(graph):
         raise ValueError("MinimumSpanningTree: input is not undirected")
     for u in graph:
         for v in graph[u]:
