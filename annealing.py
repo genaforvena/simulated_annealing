@@ -1,13 +1,34 @@
 from random import random
 import math
+import copy
+
 from UnionFind import UnionFind
 from Graphs import isUndirected
+
 
 __author__ = 'imozerov'
 
 class Solution:
-    # Map-like object containing names of pairs as keys and weights as values
-    pass
+    """
+    Object with weights map.
+    Map contains names of pairs as keys and weights as values
+    This object is able to create it's neighbour by
+    randomly changing one of weights.
+    """
+    def __init__(self):
+        self._weights_map = {}
+
+    @property
+    def weights_map(self):
+        return self._weights_map
+
+    @weights_map.setter
+    def weights_map(self, new_map):
+        self._weights_map = new_map
+
+    def neighbor(self):
+        neighbor = copy.deepcopy(self)
+        neighbor.weights_map[random.choice(self._weights_map.keys())] = random()
 
 
 def anneal(sol):
@@ -30,10 +51,13 @@ def anneal(sol):
 
 
 def cost(sol):
+    """
+    builds a tree with solution weight and after that
+    calculates distance between new tree and same tree for
+    same sentence from training dataset
+    """
     pass
-    # should build a tree with solution weights
-    # and after that
-    # calculate distance between new tree and same tree for same sentence from training dataset
+
     return 0
 
 
