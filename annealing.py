@@ -30,6 +30,18 @@ class Solution:
     def neighbor(self):
         neighbor = copy.deepcopy(self)
         neighbor.weights_map[random.choice(self._weights_map.keys())] = random()
+        return neighbor
+
+    def to_graph(self, sentence):
+        """
+        creates graph with given weight vectors.
+        graph is represented as it minimum_spinning_tree requires
+        """
+        graph = []
+        for word in sentence:
+            
+            graph[word.position] = word.parent
+        pass
 
 
 def anneal(sol):
