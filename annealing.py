@@ -4,7 +4,7 @@ import copy
 
 from unionFind import UnionFind
 from graphs import is_undirected
-
+from langAbstractions import *
 
 __author__ = 'imozerov'
 
@@ -28,6 +28,9 @@ class Solution:
         self._weights_map = new_map
 
     def neighbor(self):
+        """
+        maybe change to not random but some close value
+        """
         neighbor = copy.deepcopy(self)
         neighbor.weights_map[random.choice(self._weights_map.keys())] = random()
         return neighbor
@@ -37,11 +40,28 @@ class Solution:
         creates graph with given weight vectors.
         graph is represented as it minimum_spinning_tree requires
         """
-        graph = []
-        for word in sentence:
-            
-            graph[word.position] = word.parent
-        pass
+        graph = [[[]]]
+        for (i, word) in enumerate(sentence.words):
+            other_words = [w for w in sentence if w != word]
+            for (j, other_word) in enumerate(other_words):
+                graph[i[j]] = self._get_weight(word, other_word)
+        return graph
+
+    def _get_weight(self, word, other_word):
+        """"
+        returns weight of given word pair
+        """""
+        key = self._create_pair(word.features + other_word.features)
+        if not self.weights_map[key]:
+            return random(1)
+        return self.weights_map[key]
+
+    @staticmethod
+    def _create_pair(features1, features2):
+        if features1 > features2:
+            return features1 + features2
+        else:
+            return features2 + features1
 
 
 def anneal(sol):
