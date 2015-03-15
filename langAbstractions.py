@@ -1,5 +1,6 @@
 from xml.etree.ElementTree import Element, SubElement
 from xml.etree import ElementTree
+from unionFind import UnionFind
 
 __author__ = 'imozerov'
 
@@ -20,6 +21,24 @@ class TgtDocument:
 class Sentence:
     def __init__(self, element):
         self._words = [Word(x) for x in element.findall("W")]
+        self._tree = self._build_tree()
+
+    def _build_tree(self):
+        tree = []
+        subtrees = UnionFind()
+        for word in self._words:
+            tree.append([word.id, self._find_parent(word).id])
+        return tree
+
+    def _find_parent(self, word):
+        if word.parent != 0:
+            return self._words[word.parent - 1]
+        else:
+            return word
+
+    @property
+    def tree(self):
+        return self._tree
 
     @property
     def words(self):
@@ -29,13 +48,13 @@ class Sentence:
 class Word:
     def __init__(self, element):
         self._word = element.text
+        self._id = int(element.attrib["ID"])
         if element.attrib["DOM"] != "_root":
             self._parent = int(element.attrib["DOM"])
             self._features = element.attrib["FEAT"] + " " + element.attrib["LINK"]
         else:
-            self._parent = 0
+            self._parent = self._id
             self._features = element.attrib["FEAT"]
-        self._id = int(element.attrib["ID"])
         self._lemma = element.attrib["LEMMA"]
 
     @property

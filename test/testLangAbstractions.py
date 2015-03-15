@@ -16,6 +16,9 @@ class TestTgtDocument(unittest.TestCase):
         self.assertEqual(7, tgt_file.sentences[0].words[7].parent)
         self.assertEqual("S ЕД МУЖ ДАТ ОД предл", tgt_file.sentences[0].words[7].features)
         self.assertEqual("ОН", tgt_file.sentences[0].words[7].lemma)
+        self.assertListEqual([[1, 2], [2, 2], [3, 2], [4, 5], [5, 2], [6, 5], [7, 6], [8, 7], [9, 6], [10, 9]],
+                             tgt_file.sentences[0].tree)
+
 
 if __name__ == '__main__':
     unittest.main()

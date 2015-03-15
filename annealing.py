@@ -38,7 +38,7 @@ class Solution:
     def to_graph(self, sentence):
         """
         creates graph with given weight vectors.
-        graph is represented as it minimum_spinning_tree requires
+        graph is represented as it minimum_spinning_tree function requires
         """
         graph = [[[]]]
         for (i, word) in enumerate(sentence.words):
