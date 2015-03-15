@@ -53,9 +53,10 @@ class Solution:
         """"
         returns weight of given word pair
         """""
-        key = self._create_pair(word.features + other_word.features)
-        if not self.weights_map[key]:
-            return random(1)
+        key = self._create_pair(word.features, other_word.features)
+        if key not in self.weights_map.keys():
+            self._weights_map[key] = random()
+            return self._weights_map[key]
         return self.weights_map[key]
 
     @staticmethod
@@ -118,4 +119,4 @@ class SentencesList:
 
 
 if __name__ == "__main__":
-    pass
+    anneal(Solution())
