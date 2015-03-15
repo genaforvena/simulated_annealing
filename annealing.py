@@ -1,6 +1,10 @@
+import os
 from random import random
 import math
 import copy
+
+from os import listdir
+from os.path import isfile, join
 
 from langAbstractions import *
 
@@ -62,9 +66,12 @@ class Solution:
             return features2 + features1
 
 
+def acceptance_probability(old_cost, new_cost, temperature):
+    return math.exp((new_cost - old_cost) / temperature)
+
 def anneal(sol):
-    # TODO read sentence
-    sentence = None
+    sentences = SentencesList()
+    sentence = sentences.next()
     old_cost = sol.cost(sentence)
     T = 1.0
     T_min = 0.00001
@@ -79,13 +86,35 @@ def anneal(sol):
                 sol = new_sol
                 old_cost = new_cost
             i += 1
-            # TODO read next sentence
+            sentence = sentences.next()
+
         T *= alpha
     return sol, sol.cost
 
 
-def acceptance_probability(old_cost, new_cost, temperature):
-    return math.exp((new_cost - old_cost) / temperature)
+class SentencesList:
+    def __init__(self):
+        dates = [x for x in range(2003, 2014)]
+        path_root = "/home/imozerov/Diploma/syntagrus/SynTagRus2014"
+        self.files = []
+        self.current_file_index = 0
+        self.current_sentence_index = 0
+        for i in dates:
+            self.files.extend([path_root + "/" + str(i) + "/" + f for f in listdir(path_root + "/" + str(i)) if isfile(join(path_root + "/" + str(i), f))])
+        self.current_document = TgtDocument(self.files[self.current_file_index])
+        self.current_sentence = self.current_document.sentences[self.current_sentence_index]
+
+    def next(self):
+        self.current_sentence_index += 1
+        if self.current_sentence_index > len(self.current_document.sentences) - 1:
+            self.current_file_index += 1
+            self.current_sentence_index = 0
+            self.current_document = TgtDocument(self.files[self.current_file_index])
+            if self.current_file_index > len(self.files) - 1:
+                self.current_file_index = 0
+                self.current_sentence_index = 0
+                self.current_document = TgtDocument(self.files[self.current_file_index])
+        return self.current_document.sentences[self.current_sentence_index]
 
 
 if __name__ == "__main__":
