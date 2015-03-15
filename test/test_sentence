@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<text ver="1.1">
+<inf>
+<annot>ЛЦ</annot>
+<author>З. Прилепин</author>
+<editor>ЛИ</editor>
+<source>"Новая газета"   19 апреля 2013</source>
+<title>Боги меняются местами</title>
+</inf>
+<body>
+<S CLASS="LF" ID="1">
+<W DOM="2" FEAT="S ЕД МУЖ ИМ НЕОД" ID="1" LEMMA="ШАНХАЙ" LINK="предик">Шанхай</W>
+<W DOM="_root" FEAT="V НЕСОВ ИЗЪЯВ НЕПРОШ ЕД 3-Л" ID="2" LEMMA="КАЗАТЬСЯ">кажется</W>
+<W DOM="2" FEAT="A ЕД МУЖ ТВОР" ID="3" LEMMA="НЕРЕАЛЬНЫЙ" LINK="1-компл">нереальным</W>,
+<W DOM="5" FEAT="PART" ID="4" LEMMA="УЖЕ" LINK="огранич">уже</W>
+<W DOM="2" FEAT="CONJ" ID="5" LEMMA="КОГДА" LINK="обст">когда</W>
+<W DOM="5" FEAT="V НЕСОВ ИЗЪЯВ НЕПРОШ ЕД 2-Л" ID="6" LEMMA="ПОДЛЕТАТЬ" LINK="подч-союзн">подлетаешь</W>
+<W DOM="6" FEAT="PR" ID="7" LEMMA="К" LINK="2-компл">к</W>
+<W DOM="7" FEAT="S ЕД МУЖ ДАТ ОД" ID="8" LEMMA="ОН" LINK="предл">нему</W>
+<W DOM="6" FEAT="PR" ID="9" LEMMA="НА" LINK="обст">на</W>
+<W DOM="9" FEAT="S ЕД МУЖ ПР НЕОД" ID="10" LEMMA="САМОЛЕТ" LINK="предл">самолете</W>.
+<LF LFARG="10" LFFUNC="_LOC" LFVAL="9"/>
+</S>
+</body>
+</text>

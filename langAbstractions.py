@@ -1,24 +1,25 @@
-__author__ = 'imozerov'
+from xml.etree.ElementTree import Element, SubElement
+from xml.etree import ElementTree
 
-import elementtree.ElementTree import Element, SubElement, ElementTree
+__author__ = 'imozerov'
 
 # Check this tutorial http://effbot.org/zone/element.htm 
 
 class TgtDocument:
-	def __init__(self, filename):
-		tree = ElementTree(file=filename)
-		xml = Element("xml")
-		body = SubElement(xml, "body")	
-		self._senteces = [Sentence(x) for x in body.findall("S")]
-	
-	@property
-	def sentences(self):
-		return self._senteces
-	
+    def __init__(self, filename):
+        tree = ElementTree.parse(filename)
+        root = tree.getroot()
+        body = root.find("body")
+        self._senteces = [Sentence(x) for x in body.findall("S")]
+
+    @property
+    def sentences(self):
+        return self._senteces
+
 
 class Sentence:
     def __init__(self, element):
-        self._words = [Word(x) for x in string.findall("W")]
+        self._words = [Word(x) for x in element.findall("W")]
 
     @property
     def words(self):
@@ -28,20 +29,30 @@ class Sentence:
 class Word:
     def __init__(self, element):
         self._word = element.text
-        self._features = self._parse_features()
+        if element.attrib["DOM"] != "_root":
+            self._parent = int(element.attrib["DOM"])
+            self._features = element.attrib["FEAT"] + " " + element.attrib["LINK"]
+        else:
+            self._parent = 0
+            self._features = element.attrib["FEAT"]
+        self._id = int(element.attrib["ID"])
+        self._lemma = element.attrib["LEMMA"]
 
     @property
-    def features(self):
-        return self._features
-
-    @property
-    def features(self):
+    def word(self):
         return self._word
 
+    @property
+    def lemma(self):
+        return self._lemma
 
-class Features:
-    def __init__(self, element):
-        self._features = string
+    @property
+    def id(self):
+        return self._id
+
+    @property
+    def parent(self):
+        return self._parent
 
     @property
     def features(self):
