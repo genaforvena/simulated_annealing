@@ -32,7 +32,7 @@ class Sentence:
 
     def _find_parent(self, word):
         if word.parent != 0:
-            return self._words[word.parent - 1]
+            return self._words[word.parent]
         else:
             return word
 
@@ -48,9 +48,9 @@ class Sentence:
 class Word:
     def __init__(self, element):
         self._word = element.text
-        self._id = int(element.attrib["ID"])
+        self._id = int(element.attrib["ID"]) - 1
         if element.attrib["DOM"] != "_root":
-            self._parent = int(element.attrib["DOM"])
+            self._parent = int(element.attrib["DOM"]) - 1
             self._features = element.attrib["FEAT"] + " " + element.attrib["LINK"]
         else:
             self._parent = self._id
