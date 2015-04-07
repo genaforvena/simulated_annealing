@@ -21,7 +21,7 @@ class TestTgtDocument(unittest.TestCase):
         for pair in tree_from_txt:
             tree_should_be.append([(x - 1) for x in pair])
         self.assertListEqual(tree_should_be,
-                             tgt_file.sentences[0].tree)
+                             tgt_file.sentences[0].test_tree)
 
 
 if __name__ == '__main__':

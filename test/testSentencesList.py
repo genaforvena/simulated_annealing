@@ -1,5 +1,5 @@
 import unittest
-from annealing import SentencesList
+from solution import SentencesList
 
 __author__ = 'imozerov'
 
