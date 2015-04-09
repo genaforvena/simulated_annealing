@@ -5,7 +5,6 @@ from unionFind import UnionFind
 class Graph:
     def __init__(self, words, solution):
         word_pairs = itertools.combinations(words, 2)
-        print(list(word_pairs))
         self._graph = [[word1, word2, solution.get_weight(word1, word2)] for (word1, word2) in word_pairs]
 
     def minimum_spanning_tree(self):
@@ -18,8 +17,12 @@ class Graph:
         """
         subtrees = UnionFind()
         tree = []
-        for W, u, v in sorted((self._graph[u][v], u, v) for u in self._graph for v in self._graph[u]):
+        for u, v, W in sorted(self._graph):
             if subtrees[u] != subtrees[v]:
                 tree.append((u, v))
                 subtrees.union(u, v)
         return tree
+
+    @property
+    def graph(self):
+        return self._graph

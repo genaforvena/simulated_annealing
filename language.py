@@ -80,7 +80,14 @@ class Word:
         return self._features
 
     def __str__(self, *args, **kwargs):
-        return self.word + " id: " + str(self.id) + " -> parent: " + str(self.parent)
+        return "\"" + self.word + " " + str(self.id) + " -> " + str(self.parent) + "\""
 
     def __repr__(self):
         return self.__str__()
+
+    def __lt__(self, other):
+        return self.id < other.id
+
+    def __hash__(self):
+        return hash(self.id)
+

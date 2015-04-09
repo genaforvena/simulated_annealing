@@ -24,4 +24,7 @@ class TestGraph(unittest.TestCase):
                                 Solution.create_pair(word2.features, word3.features): 1}
         graph_under_test = Graph(words, solution)
 
-        self.assertEqual([[word1, word2, 1], [word2, word3, 1]], graph_under_test.minimum_spanning_tree())
+        minimum_spanning_tree = graph_under_test.minimum_spanning_tree()
+        print(minimum_spanning_tree)
+        self.assertEqual(3, len(graph_under_test.graph))
+        self.assertEqual([(word1, word2), (word2, word3)], minimum_spanning_tree)
