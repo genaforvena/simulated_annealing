@@ -6,7 +6,7 @@ import copy
 from os import listdir
 from os.path import isfile, join
 
-from langAbstractions import *
+from language import *
 from solution import Solution, SentencesList
 
 __author__ = 'imozerov'
@@ -38,4 +38,4 @@ def acceptance_probability(old_cost, new_cost, temperature):
     return math.exp((new_cost - old_cost) / temperature)
 
 if __name__ == "__main__":
-    anneal(Solution("/home/imozerov/Diploma/syntagrus/SynTagRus2014"))
+    anneal(Solution())

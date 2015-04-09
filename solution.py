@@ -1,3 +1,9 @@
+import copy
+from os import listdir
+from os.path import isfile, join
+from random import random
+from language import TgtDocument
+
 __author__ = 'imozerov'
 
 class Solution:
@@ -57,13 +63,15 @@ class Solution:
 
 
 class SentencesList:
-    def __init__(self, path_root):
+    def __init__(self):
+        path_root = "/home/imozerov/Diploma/syntagrus/SynTagRus2014"
         dates = [x for x in range(2003, 2014)]
         self.files = []
         self.current_file_index = 0
         self.current_sentence_index = 0
         for i in dates:
-            self.files.extend([path_root + "/" + str(i) + "/" + f for f in listdir(path_root + "/" + str(i)) if isfile(join(path_root + "/" + str(i), f))])
+            self.files.extend([path_root + "/" + str(i) + "/" + f for
+                               f in listdir(path_root + "/" + str(i)) if isfile(join(path_root + "/" + str(i), f))])
         self.current_document = TgtDocument(self.files[self.current_file_index])
         self.current_sentence = self.current_document.sentences[self.current_sentence_index]
 

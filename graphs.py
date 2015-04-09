@@ -1,9 +1,9 @@
 from unionFind import UnionFind
 
+
 class Graph:
     def __init__(self, words, solution):
         self._graph = self._create_graph(words, solution)
-        pass
 
     def _create_graph(self, words, solution):
         """
@@ -18,7 +18,7 @@ class Graph:
                 graph[word] = graph[word] + [other_word, solution.get_weight(word, other_word)]
         return graph
 
-    def minimum_spanning_tree(self, solution):
+    def minimum_spanning_tree(self):
         """
         Return the minimum spanning tree of an undirected graph G.
         G should be represented in such a way that iter(G) lists its
@@ -26,12 +26,11 @@ class Graph:
         length of edge u,v, and G[u][v] should always equal G[v][u].
         The tree is returned as a list of edges.
         """
-        graph = self._to_graph(solution)
-        if not is_undirected():
+        if not self._is_undirected():
             raise ValueError("MinimumSpanningTree: input is not undirected")
-        for u in graph:
-            for v in graph[u]:
-                if graph[u][v] != graph[v][u]:
+        for u in self._graph:
+            for v in self._graph[u]:
+                if self._graph[u][v] != self._graph[v][u]:
                     raise ValueError("MinimumSpanningTree: asymmetric weights")
 
         # Kruskal's algorithm: sort edges by weight, and add them one at a time.
@@ -40,13 +39,13 @@ class Graph:
         # part (the sort) is sped up by being built in to Python.
         subtrees = UnionFind()
         tree = []
-        for W, u, v in sorted((graph[u][v], u, v) for u in graph for v in graph[u]):
+        for W, u, v in sorted((self._graph[u][v], u, v) for u in self._graph for v in self._graph[u]):
             if subtrees[u] != subtrees[v]:
                 tree.append((u, v))
                 subtrees.union(u, v)
         return tree
 
-    def is_undirected():
+    def is_undirected(self):
         """Check that it is simple undirected graph."""
         for v in G:
             if v in G[v]:

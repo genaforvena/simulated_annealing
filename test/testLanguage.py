@@ -1,4 +1,4 @@
-from langAbstractions import TgtDocument
+from language import TgtDocument
 
 __author__ = 'imozerov'
 

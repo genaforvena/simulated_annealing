@@ -3,6 +3,7 @@ from solution import SentencesList
 
 __author__ = 'imozerov'
 
+
 class TestSentencesList(unittest.TestCase):
     def test_next(self):
         sentences = SentencesList()
