@@ -20,18 +20,18 @@ class UnionFind:
         self.weights = {}
         self.parents = {}
 
-    def __getitem__(self, object):
+    def __getitem__(self, obj):
         """Find and return the name of the set containing the object."""
 
         # check for previously unknown object
-        if object not in self.parents:
-            self.parents[object] = object
-            self.weights[object] = 1
-            return object
+        if obj not in self.parents:
+            self.parents[obj] = obj
+            self.weights[obj] = 1
+            return obj
 
         # find path of objects leading to the root
-        path = [object]
-        root = self.parents[object]
+        path = [obj]
+        root = self.parents[obj]
         while root != path[-1]:
             path.append(root)
             root = self.parents[root]
@@ -48,7 +48,7 @@ class UnionFind:
     def union(self, *objects):
         """Find the sets containing the objects and merge them all."""
         roots = [self[x] for x in objects]
-        heaviest = max([(self.weights[r],r) for r in roots])[1]
+        heaviest = max([(self.weights[r], r) for r in roots])[1]
         for r in roots:
             if r != heaviest:
                 self.weights[heaviest] += self.weights[r]
