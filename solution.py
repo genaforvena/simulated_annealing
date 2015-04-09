@@ -48,14 +48,14 @@ class Solution:
         """"
         returns weight of given word pair
         """""
-        key = self._create_pair(word.features, other_word.features)
+        key = self.create_pair(word.features, other_word.features)
         if key not in self.weights_map.keys():
             self._weights_map[key] = random()
             return self._weights_map[key]
         return self.weights_map[key]
 
     @staticmethod
-    def _create_pair(features1, features2):
+    def create_pair(features1, features2):
         if features1 > features2:
             return features1 + features2
         else:

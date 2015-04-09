@@ -1,22 +1,12 @@
+import itertools
 from unionFind import UnionFind
 
 
 class Graph:
     def __init__(self, words, solution):
-        self._graph = self._create_graph(words, solution)
-
-    def _create_graph(self, words, solution):
-        """
-        creates graph with given weight vectors.
-        graph is represented as it minimum_spinning_tree function requires
-        """
-        graph = []
-        for word in words:
-            for other_word in words:
-                if word is other_word:
-                    continue
-                graph[word] = graph[word] + [other_word, solution.get_weight(word, other_word)]
-        return graph
+        word_pairs = itertools.combinations(words, 2)
+        print(list(word_pairs))
+        self._graph = [[word1, word2, solution.get_weight(word1, word2)] for (word1, word2) in word_pairs]
 
     def minimum_spanning_tree(self):
         """
@@ -26,17 +16,6 @@ class Graph:
         length of edge u,v, and G[u][v] should always equal G[v][u].
         The tree is returned as a list of edges.
         """
-        if not self._is_undirected():
-            raise ValueError("MinimumSpanningTree: input is not undirected")
-        for u in self._graph:
-            for v in self._graph[u]:
-                if self._graph[u][v] != self._graph[v][u]:
-                    raise ValueError("MinimumSpanningTree: asymmetric weights")
-
-        # Kruskal's algorithm: sort edges by weight, and add them one at a time.
-        # We use Kruskal's algorithm, first because it is very simple to
-        # implement once UnionFind exists, and second, because the only slow
-        # part (the sort) is sped up by being built in to Python.
         subtrees = UnionFind()
         tree = []
         for W, u, v in sorted((self._graph[u][v], u, v) for u in self._graph for v in self._graph[u]):
@@ -44,13 +23,3 @@ class Graph:
                 tree.append((u, v))
                 subtrees.union(u, v)
         return tree
-
-    def is_undirected(self):
-        """Check that it is simple undirected graph."""
-        for v in G:
-            if v in G[v]:
-                return False
-            for w in G[v]:
-                if v not in G[w]:
-                    return False
-        return True

@@ -2,6 +2,7 @@ from xml.etree import ElementTree
 
 __author__ = 'imozerov'
 
+
 class TgtDocument:
     def __init__(self, filename):
         tree = ElementTree.parse(filename)
@@ -11,6 +12,9 @@ class TgtDocument:
 
     @property
     def sentences(self):
+        return self._sentences
+
+    def __str__(self, *args, **kwargs):
         return self._sentences
 
 
@@ -37,6 +41,9 @@ class Sentence:
 
     @property
     def words(self):
+        return self._words
+
+    def __str__(self, *args, **kwargs):
         return self._words
 
 
@@ -71,3 +78,9 @@ class Word:
     @property
     def features(self):
         return self._features
+
+    def __str__(self, *args, **kwargs):
+        return self.word + " id: " + str(self.id) + " -> parent: " + str(self.parent)
+
+    def __repr__(self):
+        return self.__str__()
