@@ -17,7 +17,7 @@ class Graph:
         """
         subtrees = UnionFind()
         tree = []
-        for u, v, W in sorted(self._graph):
+        for u, v, W in sorted(self._graph, key=lambda x: x[2]):
             if subtrees[u] != subtrees[v]:
                 tree.append((u, v))
                 subtrees.union(u, v)

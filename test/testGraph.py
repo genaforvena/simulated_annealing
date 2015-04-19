@@ -20,11 +20,10 @@ class TestGraph(unittest.TestCase):
         word3 = sentence.words[2]
         words = [word1, word2, word3]
         solution = Solution()
-        solution.weights_map = {Solution.create_pair(word1.features, word2.features): 1,
-                                Solution.create_pair(word2.features, word3.features): 1}
+        solution.weights_map = {Solution.create_pair(word1.features, word2.features): 0.00000001,
+                                Solution.create_pair(word2.features, word3.features): 0.00000009}
         graph_under_test = Graph(words, solution)
 
         minimum_spanning_tree = graph_under_test.minimum_spanning_tree()
-        print(minimum_spanning_tree)
         self.assertEqual(3, len(graph_under_test.graph))
         self.assertEqual([(word1, word2), (word2, word3)], minimum_spanning_tree)
