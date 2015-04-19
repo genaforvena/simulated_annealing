@@ -1,8 +1,11 @@
+import pickle
 from random import random
 import math
+from language import SentencesList
 
-from solution import Solution, SentencesList
+from solution import Solution
 
+SOLUTION = "solution.p"
 
 __author__ = 'imozerov'
 
@@ -34,4 +37,5 @@ def acceptance_probability(old_cost, new_cost, temperature):
     return math.exp((new_cost - old_cost) / temperature)
 
 if __name__ == "__main__":
-    anneal(Solution())
+    (solution, solution_cost) = anneal(Solution())
+    pickle.dump(solution, open(SOLUTION, "wb"))

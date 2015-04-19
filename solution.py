@@ -16,8 +16,8 @@ class Solution:
     This object is able to create it's neighbour by
     randomly changing one of weights.
     """
-    def __init__(self):
-        self._weights_map = {}
+    def __init__(self, weights_map={}):
+        self._weights_map = weights_map
 
     def cost(self, sentence):
         """
@@ -63,29 +63,3 @@ class Solution:
             return features1 + features2
         else:
             return features2 + features1
-
-
-class SentencesList:
-    def __init__(self):
-        path_root = "/home/imozerov/Diploma/syntagrus/SynTagRus2014"
-        dates = [x for x in range(2003, 2014)]
-        self.files = []
-        self.current_file_index = 0
-        self.current_sentence_index = 0
-        for i in dates:
-            self.files.extend([path_root + "/" + str(i) + "/" + f for
-                               f in listdir(path_root + "/" + str(i)) if isfile(join(path_root + "/" + str(i), f))])
-        self.current_document = TgtDocument(self.files[self.current_file_index])
-        self.current_sentence = self.current_document.sentences[self.current_sentence_index]
-
-    def next(self):
-        self.current_sentence_index += 1
-        if self.current_sentence_index > len(self.current_document.sentences) - 1:
-            self.current_file_index += 1
-            self.current_sentence_index = 0
-            self.current_document = TgtDocument(self.files[self.current_file_index])
-            if self.current_file_index > len(self.files) - 1:
-                self.current_file_index = 0
-                self.current_sentence_index = 0
-                self.current_document = TgtDocument(self.files[self.current_file_index])
-        return self.current_document.sentences[self.current_sentence_index]
