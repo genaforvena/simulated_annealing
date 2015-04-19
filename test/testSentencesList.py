@@ -1,5 +1,7 @@
 import unittest
+
 from solution import SentencesList
+
 
 __author__ = 'imozerov'
 

@@ -1,24 +1,20 @@
-import os
 from random import random
 import math
-import copy
 
-from os import listdir
-from os.path import isfile, join
-
-from language import *
 from solution import Solution, SentencesList
+
 
 __author__ = 'imozerov'
 
 
 def anneal(solution):
-    sentences = SentencesList()
-    sentence = sentences.next()
-    old_cost = solution.cost(sentence)
     temperature_current = 1.0
     temperature_min = 0.00001
     alpha = 0.99
+
+    sentences = SentencesList()
+    sentence = sentences.next()
+    old_cost = solution.cost(sentence)
     while temperature_current > temperature_min:
         i = 1
         while i <= 1000:

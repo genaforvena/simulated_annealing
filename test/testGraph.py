@@ -1,8 +1,10 @@
 import unittest
 from xml.etree import ElementTree
+
 from graphs import Graph
-from language import Word, Sentence
+from language import Sentence
 from solution import Solution
+
 
 __author__ = 'imozerov'
 

@@ -1,8 +1,11 @@
 import copy
 from os import listdir
 from os.path import isfile, join
-from random import random
+from random import random, choice
+from graphs import Graph
+
 from language import TgtDocument
+
 
 __author__ = 'imozerov'
 
@@ -21,7 +24,7 @@ class Solution:
         Returns cost of given sentence with this solution
         Tree distance algorithm needs to be implemented
         """
-        solution_tree = sentence.minimum_spanning_tree(self)
+        solution_tree = Graph(sentence, self).minimum_spanning_tree()
         distance = 0
         for node in solution_tree:
             if node not in sentence.test_tree:
@@ -41,7 +44,7 @@ class Solution:
         maybe change to not random but some close value
         """
         neighbor = copy.deepcopy(self)
-        neighbor.weights_map[random.choice(self._weights_map.keys())] = random()
+        neighbor.weights_map[choice(list(self._weights_map.keys()))] = random()
         return neighbor
 
     def get_weight(self, word, other_word):
