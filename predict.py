@@ -9,8 +9,14 @@ __author__ = 'imozerov'
 
 def predict(solution):
     sentences = SentencesList()
-    for sentence in sentences:
-        print(Graph(sentence, solution).minimum_spanning_tree())
+    for i in range(1000):
+        try:
+            sentence = sentences.next()
+            print(sentence.test_tree)
+            graph = Graph(sentence, solution)
+            print(graph.minimum_spanning_tree())
+        except:
+            pass
 
 if __name__ == "__main__":
     solution = Solution(pickle.load(open(learn.SOLUTION, "rb")))
