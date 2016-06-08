@@ -8,9 +8,9 @@ class Graph:
         word_pairs = itertools.combinations(sentence.words, 2)
         self._graph = [[word1, word2, solution.get_weight(word1, word2)] for (word1, word2) in word_pairs]
 
-    def minimum_spanning_tree(self):
+    def maximum_spanning_tree(self):
         """
-        Return the minimum spanning tree of an undirected graph G.
+        Return the maximum spanning tree of an undirected graph G.
         G should be represented in such a way that iter(G) lists its
         vertices, iter(G[u]) lists the neighbors of u, G[u][v] gives the
         length of edge u,v, and G[u][v] should always equal G[v][u].

@@ -14,7 +14,7 @@ def predict(solution):
             sentence = sentences.next()
             print(sentence.test_tree)
             graph = Graph(sentence, solution)
-            print(graph.minimum_spanning_tree())
+            print(graph.maximum_spanning_tree())
         except:
             pass
 

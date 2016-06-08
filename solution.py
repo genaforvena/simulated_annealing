@@ -23,7 +23,7 @@ class Solution:
         """
         Returns cost of given sentence with this solution
         """
-        solution_tree = Graph(sentence, self).minimum_spanning_tree()
+        solution_tree = Graph(sentence, self).maximum_spanning_tree()
         distance = 0
         for node in solution_tree:
             if node not in sentence.test_tree:
