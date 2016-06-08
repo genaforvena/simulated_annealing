@@ -36,6 +36,7 @@ class SentencesList:
             self.current_document = TgtDocument(self.files[self.current_file_index])
         return self.current_document.sentences[self.current_sentence_index]
 
+
 class TgtDocument:
     def __init__(self, filename):
         tree = ElementTree.parse(filename)

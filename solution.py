@@ -1,13 +1,10 @@
 import copy
-from os import listdir
-from os.path import isfile, join
 from random import random, choice
+
 from graphs import Graph
 
-from language import TgtDocument
-
-
 __author__ = 'imozerov'
+
 
 class Solution:
     """
@@ -16,6 +13,7 @@ class Solution:
     This object is able to create it's neighbour by
     randomly changing one of weights.
     """
+
     def __init__(self, weights_map={}):
         self._weights_map = weights_map
 
@@ -43,7 +41,8 @@ class Solution:
         maybe change to not random but some close value
         """
         neighbor = copy.deepcopy(self)
-        neighbor.weights_map[choice(list(self._weights_map.keys()))] = random()
+        for weight in range(random(neighbor.count())):
+            neighbor.weights_map[choice(list(self._weights_map.keys()))] = random()
         return neighbor
 
     def get_weight(self, word, other_word):
