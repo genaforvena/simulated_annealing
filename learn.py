@@ -9,30 +9,45 @@ __author__ = 'imozerov'
 
 
 def anneal():
-    weights = {}
     distance = 9999999
+    weights = {}
+
     temperature_current = 1.0
     temperature_min = 0.00001
     alpha = 0.99
 
     sentences = language.SentencesList()
     sentence = sentences.next()
+    weights = add_missing_features(sentence, weights)
+
     while temperature_current > temperature_min:
         i = 1
         while i <= 100:
             neighbour_weights = create_neighbour(weights)
-            neighbour_distance = calculate_distance(sentence, neighbour_distance)
+            mst = maximum_spanning_tree(sentence)
+            neighbour_distance = calculate_distance(mst, sentence.test_tree)
             accept_probability = acceptance_probability(distance, neighbour_distance, temperature_current)
             if accept_probability > random():
                 weights = neighbour_weights
             i += 1
             sentence = sentences.next()
+            weights = add_missing_features(sentence)
         temperature_current *= alpha
     return weights
 
 
-def calculate_distance(sentence, distance):
-    sentence
+def add_missing_features(sentence, weights):
+    for feature in [x.features for x in sentence.words]:
+        if weights.get(feature) is None:
+            weights[feature] = 0
+
+    return weights
+
+def maximum_spanning_tree(sentence, weights):
+    return
+
+
+def calculate_distance(tree1, tree2):
     return 0
 
 
