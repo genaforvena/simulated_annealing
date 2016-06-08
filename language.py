@@ -6,8 +6,7 @@ __author__ = 'imozerov'
 
 
 class SentencesList:
-    def __init__(self):
-        path_root = "/home/imozerov/Developer/simulated_annealing/syntagrus/SynTagRus2014"
+    def __init__(self, path_root="/home/imozerov/Developer/simulated_annealing/syntagrus/SynTagRus2014"):
         dates = [x for x in range(2003, 2014)]
         self.files = []
         self.current_file_index = 0
@@ -87,10 +86,10 @@ class Word:
         self._id = int(element.attrib["ID"]) - 1
         if element.attrib["DOM"] != "_root":
             self._parent = int(element.attrib["DOM"]) - 1
-            self._features = element.attrib["FEAT"] + " " + element.attrib["LINK"]
+            self._features = Feature(element.attrib["FEAT"] + " " + element.attrib["LINK"])
         else:
             self._parent = self._id
-            self._features = element.attrib["FEAT"]
+            self._features = Feature(element.attrib["FEAT"])
         if "LEMMA" in element.attrib:
             self._lemma = element.attrib["LEMMA"]
 
@@ -125,4 +124,12 @@ class Word:
 
     def __hash__(self):
         return hash(self.id)
+
+
+class Feature:
+    def __init__(self, string):
+        self.value = " ".join(sorted(string.split(" "))).strip()
+
+    def __add__(self, other):
+        return " ".join(sorted(self.value + other.value)).strip()
 

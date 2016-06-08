@@ -14,7 +14,7 @@ class TestTgtDocument(unittest.TestCase):
         self.assertEqual("нему", tgt_file.sentences[0].words[7].word)
         self.assertEqual(7, tgt_file.sentences[0].words[7].id)
         self.assertEqual(6, tgt_file.sentences[0].words[7].parent)
-        self.assertEqual("S ЕД МУЖ ДАТ ОД предл", tgt_file.sentences[0].words[7].features)
+        self.assertEqual("S ДАТ ЕД МУЖ ОД предл", tgt_file.sentences[0].words[7].features.value)
         self.assertEqual("ОН", tgt_file.sentences[0].words[7].lemma)
         tree_from_txt = [[1, 2], [2, 2], [3, 2], [4, 5], [5, 2], [6, 5], [7, 6], [8, 7], [9, 6], [10, 9]]
         tree_should_be = []
