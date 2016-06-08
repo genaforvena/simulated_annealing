@@ -22,7 +22,6 @@ class Solution:
     def cost(self, sentence):
         """
         Returns cost of given sentence with this solution
-        Tree distance algorithm needs to be implemented
         """
         solution_tree = Graph(sentence, self).minimum_spanning_tree()
         distance = 0
@@ -52,10 +51,10 @@ class Solution:
         returns weight of given word pair
         """""
         key = self.create_pair(word.features, other_word.features)
-        if key not in self.weights_map.weights_map.keys():
-            self._weights_map._weights_map[key] = random()
-            return self._weights_map._weights_map[key]
-        return self.weights_map.weights_map[key]
+        if key not in self.weights_map.keys():
+            self._weights_map[key] = random()
+            return self._weights_map[key]
+        return self.weights_map[key]
 
     @staticmethod
     def create_pair(features1, features2):
