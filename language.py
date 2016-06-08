@@ -7,7 +7,7 @@ __author__ = 'imozerov'
 
 class SentencesList:
     def __init__(self):
-        path_root = "/home/imozerov/Diploma/syntagrus/SynTagRus2014"
+        path_root = "/home/imozerov/Developer/simulated_annealing/syntagrus/SynTagRus2014"
         dates = [x for x in range(2003, 2014)]
         self.files = []
         self.current_file_index = 0
